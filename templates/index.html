@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bibliothèque Mondiale</title>
+<style>
+body{font-family:Arial; max-width:700px; margin:auto; padding:20px}
+input,button{padding:10px; margin:5px 0; width:100%}
+button{background:#0d6efd; color:white; border:none; border-radius:5px}
+.card{border:1px solid #ddd; padding:10px; margin:10px 0; border-radius:8px}
+</style>
+</head>
+<body>
+<h1>📚 Ma Bibliothèque Mondiale</h1>
+<form method="POST" enctype="multipart/form-data">
+<input type="text" name="titre" placeholder="Titre du livre" required>
+<input type="text" name="auteur" placeholder="Auteur">
+<input type="file" name="photo" accept="image/*">
+<button type="submit">Ajouter le livre</button>
+</form>
+<hr>
+<h2>Livres ({{ livres|length }})</h2>
+{% for livre in livres %}
+<div class="card">
+<b>{{ livre.titre }}</b> - {{ livre.auteur }}
+{% if livre.photo %}<br><img src="/static/uploads/{{ livre.photo }}" width="120">{% endif %}
+</div>
+{% else %}
+<p>Aucun livre pour l'instant.</p>
+{% endfor %}
+</body>
+</html>
